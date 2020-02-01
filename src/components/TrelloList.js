@@ -1,11 +1,23 @@
 import React from "react";
+import TrelloCard from "./TrelloCard";
 
-const TrelloList = () => {
+const TrelloList = ({ title }) => {
   return (
-    <h2>
-    List
-    </h2>
+    <div style={styles.container}>
+      <h4>{title}</h4>
+      <TrelloCard/>
+    </div>
   )
 }
+
+const styles = {
+  container: {
+    backgroundColor: "Grey",
+    borderRadius: 3,
+    width: 300,
+    padding: 6
+  }
+}
+
 
 export default TrelloList;
