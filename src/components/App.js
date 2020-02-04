@@ -1,5 +1,6 @@
 import React from 'react';
 import TrelloList from "./TrelloList";
+import TrelloActionButton from "./TrelloActionButton";
 import { connect } from "react-redux";
 
 function App(props) {
@@ -10,9 +11,10 @@ function App(props) {
       <div style={styles.listsContainer}>
       {
         lists.map(list => (
-          <TrelloList title={list.title} cards={list.cards} />
+          <TrelloList key={list.id} title={list.title} cards={list.cards} />
         ))
       }
+      <TrelloActionButton list />
       </div>
     </div>
   );
@@ -21,8 +23,7 @@ function App(props) {
 const styles = {
   listsContainer: {
     display: "flex",
-    flexDirection: "row",
-    marginRight: 8
+    flexDirection: "row"
   }
 }
 const mapStateToProps = state => ({
