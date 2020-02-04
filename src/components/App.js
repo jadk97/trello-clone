@@ -4,8 +4,14 @@ import TrelloActionButton from "./TrelloActionButton";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 import { sort } from "../actions";
+import styled from "styled-components";
 
-function App (props) {
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+function App(props) {
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
@@ -20,25 +26,21 @@ function App (props) {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <p>Trello Clone</p>
-        <div style={styles.listsContainer}>
+        <ListContainer>
+
           {
             lists.map(list => (
               <TrelloList listID={list.id} key={list.id} title={list.title} cards={list.cards} />
             ))
           }
           <TrelloActionButton list />
-        </div>
+        </ListContainer>
       </div>
     </DragDropContext>
   );
 }
 
-const styles = {
-  listsContainer: {
-    display: "flex",
-    flexDirection: "row"
-  }
-}
+
 const mapStateToProps = state => ({
   lists: state.lists
 })
