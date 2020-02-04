@@ -14,10 +14,11 @@ const TrelloList = ({ title, cards }) => {
 
 const styles = {
   container: {
-    backgroundColor: "Grey",
+    backgroundColor: "#dfe3e6",
     borderRadius: 3,
     width: 300,
-    padding: 6
+    padding: 6,
+    marginRight: 8
   }
 }
 
