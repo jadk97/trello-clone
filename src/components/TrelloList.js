@@ -24,8 +24,8 @@ const TrelloList = ({ title, cards, listID }) => {
           {cards.map((card, index) => (
             <TrelloCard key={card.id} index={index} text={card.text} id={card.id} />
           ))}
-          <TrelloActionButton listID={listID} />
           {provided.placeholder}
+          <TrelloActionButton listID={listID} />
         </ListContainer>
       )}
     </Droppable>

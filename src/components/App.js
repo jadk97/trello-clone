@@ -2,7 +2,7 @@ import React from 'react';
 import TrelloList from "./TrelloList";
 import TrelloActionButton from "./TrelloActionButton";
 import { connect } from "react-redux";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "../actions";
 import styled from "styled-components";
 
@@ -24,17 +24,26 @@ function App(props) {
   const { lists } = props;
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="App">
+      <div>
         <p>Trello Clone</p>
-        <ListContainer>
-
-          {
-            lists.map(list => (
-              <TrelloList listID={list.id} key={list.id} title={list.title} cards={list.cards} />
-            ))
-          }
-          <TrelloActionButton list />
-        </ListContainer>
+        <Droppable droppableId="all-lists" direction="horizontal" type="list">
+        {provided => (
+          <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+  
+            {
+              lists.map(list => (
+                <TrelloList 
+                listID={list.id} 
+                key={list.id} 
+                title={list.title} 
+                cards={list.cards} 
+                />
+              ))
+            }
+            <TrelloActionButton list />
+          </ListContainer>
+        )}
+        </Droppable>
       </div>
     </DragDropContext>
   );
