@@ -74,10 +74,16 @@ const listsReducer = (state = initialState, action) => {
         droppableIdEnd,
         droppableIndexStart,
         droppableIndexEnd,
-        draggableId } = action.payload;
+        draggableId,
+        type } = action.payload;
 
       const newState = [...state];
-
+      //dragging list?
+      if(type === "list"){
+        const list = newState.splice(droppableIndexStart, 1);
+        newState.splice(droppableIndexEnd, 0, ...list);
+        return newState;
+      }
       //In the same list
       if (droppableIdStart === droppableIdEnd) {
         const list = state.find(list => droppableIdStart === list.id);
